@@ -1,0 +1,275 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+
+/* Style for the main container (Scroll Container) */
+.scroll-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+}
+
+/* The actual scrollable area */
+.scrollable-content {
+    display: flex; /* Makes card groups horizontal */
+    overflow-x: hidden; /* Hides the scrollbar and only shows one group */
+    scroll-behavior: smooth;
+    flex-grow: 1;
+    /* The width of this container determines what is visible. 
+       If you want it to fill the entire page/parent: */
+    width: 100%;
+}
+
+/* Style for each group of 3 cards */
+.card-group {
+    display: flex;
+    flex-shrink: 0; /* Prevents groups from shrinking */
+    width: 100%; /* IMPORTANT: Each group is 100% of the visible area */
+    justify-content: space-between; /* Distributes space between cards */
+    padding: 0 10px;
+}
+
+/* Individual Card Styling within the scrollable area */
+.my-card {
+    /* Calculates the perfect width for 3 cards in a row with spacing */
+    width: calc(33.333% - 20px);
+    margin: 0 10px; /* Space between cards */
+    min-width: 250px; /* Optional: ensures minimum size */
+}
+
+/* Button styles */
+.scroll-left-btn,
+.scroll-right-btn {
+    /* ... Button styling (as provided in previous answer) ... */
+    background: none;
+    border: none;
+    font-size: 2em;
+    cursor: pointer;
+    color: #007bff;
+    padding: 0 10px;
+}
+
+
+/* Ensure all images in the cards have the same fixed height */
+.my-card .card-img-top {
+    height: 180px; /* Adjust this value as needed for your design */
+    object-fit: cover; /* IMPORTANT: This scales the image to cover the container */
+    width: 100%; /* Ensure the image takes up the full width of the card */
+}
+
+/* You might already have this, but ensure your custom card class is used */
+.my-card {
+    /* ... (Your existing card styles like width: calc(33.333% - 20px); ) ... */
+    height: 400px; /* Optional: If you want all cards to be the same overall height */
+}
+
+    .my-card .btn-primary {
+        margin-top: auto;
+        margin-bottom: 20px;
+        margin-left: 10px;
+        margin-right: 10px;
+        background: radial-gradient(circle,rgba(101, 130, 130, 1) 3%, rgba(20, 19, 19, 1) 100%, rgba(153, 151, 147, 1) 98%);
+    }
+
+.display-7 {
+    font-size: 1.5rem; /* Adjust this value as needed */
+    font-weight: 350; /* Adjust weight if desired, similar to display headings */
+    line-height: 1.2; /* Adjust line-height if desired */
+}
+
+
+#card{
+    background:black;
+    color:#ffff;
+    text-align:center;
+    border-radius:5px;
+    
+}
+
+
+
+
+/*Animation for About Page*/
+
+@keyframes subtleFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.about-card {
+    background: rgba(255,255,255,0.97);
+    border-radius: 12px;
+    padding: 26px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    transition: transform .25s ease, box-shadow .25s ease;
+    animation: subtleFadeUp .6s ease both;
+}
+
+    .about-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 18px 48px rgba(15, 23, 42, 0.12);
+    }
+
+.profile-img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    border: 6px solid rgba(255,255,255,0.9);
+    animation: subtleFadeUp .6s ease .08s both;
+}
+
+.about-content {
+    max-width: 760px;
+    animation: subtleFadeUp .6s ease .12s both;
+}
+
+.name-line {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 6px;
+}
+
+    .name-line h2 {
+        margin: 0;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+    }
+
+.role-badge {
+    font-size: 0.85rem;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: linear-gradient(90deg,#eef2ff,#f1f8ff);
+    color: #0b3d91;
+    border: 1px solid rgba(11,61,145,0.06);
+}
+
+.lead-small {
+    margin: 0 0 12px 0;
+    color: #394050;
+    line-height: 1.55;
+}
+
+.tech-list {
+    gap: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 12px 0;
+}
+
+.tech-pill {
+    padding: 8px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(0,0,0,0.05);
+    background: rgba(250,250,253,0.9);
+    font-size: 0.87rem;
+    color: #222;
+}
+
+.cta-row {
+    margin-top: 14px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.small-muted {
+    color: #667085;
+    font-size: 0.9rem;
+}
+
+.meta-list {
+    margin-top: 10px;
+    color: #4b5563;
+    font-size: 0.95rem;
+}
+
+    .meta-list li {
+        margin-bottom: 6px;
+    }
+
+/* social icons */
+.social-row {
+    margin-top: 14px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.social-btn {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    text-decoration: none;
+    background: rgba(250,250,253,0.95);
+    border: 1px solid rgba(0,0,0,0.04);
+    transition: transform .12s ease, box-shadow .12s ease;
+}
+
+    .social-btn:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 6px 18px rgba(11,61,145,0.06);
+    }
+
+/* responsive */
+
+
+@media (max-width: 768px) {
+    .about-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about-content {
+        max-width: 100%;
+    }
+
+    .name-line {
+        justify-content: center;
+    }
+
+    .social-row {
+        justify-content: center;
+    }
+}
