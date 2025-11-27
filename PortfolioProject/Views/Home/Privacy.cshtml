@@ -1,0 +1,93 @@
+﻿@* @{
+    ViewData["Title"] = "About";
+}
+<h1 class="display-2">@ViewData["Title"]</h1>
+
+
+<div class="d-flex align-items-center mb-4">
+
+    <img src="/img/Profile Image.jpg" alt="My circular image" class="circular-image me-4" />
+
+    <p class="lead flex-grow-1 m-0">
+        Welcome to my portfolio website! I'm Vivek, a passionate backend developer with expertise in ASP.NET Core, C#, Java, and Spring Boot. This site showcases my projects, skills, and experiences in the tech world.
+    </p>
+
+</div> *@
+
+
+@{
+    ViewData["Title"] = "About";
+}
+
+
+<div class="container my-4">
+    <h1 class="display-4 mb-3">@ViewData["Title"]</h1>
+
+    <div class="about-card" role="region" aria-label="About Vivek">
+        <!-- Profile Image -->
+        <img src="~/img/Profile Image.jpg"
+             alt="Vivek profile photo"
+             class="profile-img" />
+
+        <!-- Content -->
+        <div class="about-content">
+            <div class="name-line">
+                <h2>Vivek <span class="text-muted" style="font-weight:500;">(Vic E)</span></h2>
+                <span class="role-badge">Full-stack Developer • Fresher</span>
+            </div>
+
+            <p class="lead-small">
+                Hi — I build backend systems and full-stack apps that solve real problems.
+                Based in <strong>Bangalore</strong>, I focus on clean APIs and robust architecture using
+                <strong>ASP.NET Core, C#, Java, and Spring Boot</strong>. I enjoy shipping features quickly and learning by building.
+            </p>
+
+            <div class="tech-list" aria-hidden="false">
+                <span class="tech-pill">ASP.NET Core</span>
+                <span class="tech-pill">C#</span>
+                <span class="tech-pill">Java</span>
+                <span class="tech-pill">Spring Boot</span>
+                <span class="tech-pill">REST APIs</span>
+                <span class="tech-pill">Entity Framework</span>
+                <span class="tech-pill">SQL Server / SQLite</span>
+                <span class="tech-pill">Git</span>
+            </div>
+
+            <ul class="meta-list">
+                <li><strong>Selected work:</strong> College Placement System, Hospital Management System.</li>
+                <li><strong>What I enjoy:</strong> backend design, clean code, building production-ready APIs.</li>
+                <li><strong>Fun fact:</strong> Apart from coding , I make hip-hop music and love DJing. Rhytm fuels both my music and my code!</li>
+            </ul>
+
+            <div class="cta-row">
+                <a class="btn btn-primary" href="~/files/Vivek_Resume.pdf" target="_blank" rel="noopener">Download Resume</a>
+                <a class="btn btn-outline-secondary" href="/Contact">Contact</a>
+                <span class="small-muted">Software Engineer Trainee @@ Cognizant - building, learning, improving  </span>
+            </div>
+
+            <!-- Social icons -->
+            <div class="social-row" aria-label="Social links">
+                <a class="social-btn" href="https://github.com/your-username" target="_blank" rel="noopener" aria-label="GitHub">
+                    <!-- GitHub SVG -->
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M12 .5C5.73.5.75 5.48.75 11.75c0 4.96 3.22 9.16 7.69 10.64.56.1.76-.24.76-.53 0-.26-.01-.95-.01-1.86-3.12.68-3.78-1.5-3.78-1.5-.51-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.73 1.16 1.73 1.16 1 .17 1.57-.74 1.57-.74.9-1.54 2.36-1.1 2.94-.84.09-.66.35-1.1.64-1.36-2.49-.28-5.11-1.25-5.11-5.56 0-1.23.44-2.23 1.16-3.02-.12-.28-.5-1.42.11-2.95 0 0 .95-.3 3.12 1.15a10.8 10.8 0 0 1 2.84-.38c.96 0 1.92.13 2.84.38 2.17-1.45 3.12-1.15 3.12-1.15.61 1.53.23 2.67.11 2.95.72.79 1.15 1.79 1.15 3.02 0 4.31-2.63 5.27-5.13 5.55.36.31.68.91.68 1.84 0 1.33-.01 2.4-.01 2.73 0 .29.19.64.77.53C20.01 20.9 23.25 16.7 23.25 11.75 23.25 5.48 18.27.5 12 .5z" />
+                    </svg>
+                </a>
+
+                <a class="social-btn" href="https://www.linkedin.com/in/your-profile" target="_blank" rel="noopener" aria-label="LinkedIn">
+                    <!-- LinkedIn SVG -->
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.11 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V24h-4zM8.5 8h3.84v2.16h.05c.54-1.02 1.86-2.1 3.83-2.1 4.1 0 4.86 2.7 4.86 6.2V24H19v-7.1c0-1.7-.03-3.9-2.37-3.9-2.38 0-2.75 1.86-2.75 3.78V24H8.5z" />
+                    </svg>
+                </a>
+
+                <a class="social-btn" href="https://twitter.com/your-handle" target="_blank" rel="noopener" aria-label="Twitter">
+                    <!-- Twitter SVG -->
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M23.44 4.83c-.8.36-1.66.6-2.56.71a4.48 4.48 0 0 0 1.97-2.47 9.03 9.03 0 0 1-2.85 1.09 4.51 4.51 0 0 0-7.69 4.12A12.8 12.8 0 0 1 3.15 3.15 4.5 4.5 0 0 0 4.5 9.7a4.4 4.4 0 0 1-2.04-.56v.06c0 2.14 1.52 3.93 3.55 4.34-.37.1-.76.15-1.16.15-.28 0-.56-.03-.83-.08.56 1.75 2.19 3.03 4.12 3.06A9.04 9.04 0 0 1 1.1 20.29 12.77 12.77 0 0 0 7.13 22c8.5 0 13.16-7.04 13.16-13.16 0-.2-.01-.4-.02-.6.9-.65 1.68-1.46 2.28-2.39z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

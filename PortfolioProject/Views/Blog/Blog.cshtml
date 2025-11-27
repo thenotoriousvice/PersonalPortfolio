@@ -1,0 +1,21 @@
+﻿@model IEnumerable<PortfolioProject.Repository.Models.BlogPost>
+@{
+    ViewData["Title"] = "Blog";
+}
+<h1>Blog</h1>
+<div class="row">
+    @foreach (var p in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">@p.Title</h5>
+                    <p class="card-text text-muted">@p.Description</p>
+                    <div class="mt-auto">
+                        <a class="btn btn-outline-primary" href="@Url.Action("Details", "Blog", new { id = p.Id })">Read</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

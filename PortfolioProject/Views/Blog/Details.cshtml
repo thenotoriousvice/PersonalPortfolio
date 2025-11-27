@@ -1,0 +1,218 @@
+﻿@model PortfolioProject.Repository.Models.BlogPost
+@{
+    ViewData["Title"] = Model.Title;
+    var comments = (List<PortfolioProject.Repository.Models.Comment>)ViewBag.Comments ?? new List<PortfolioProject.Repository.Models.Comment>();
+    var postLikesCount = (int)(ViewBag.PostLikesCount ?? 0);
+    var commentLikesRaw = (dynamic)ViewBag.CommentLikes ?? new List<object>();
+    var commentLikeDict = new Dictionary<int, int>();
+    foreach (var item in commentLikesRaw) { commentLikeDict[(int)item.CommentId] = (int)item.Count; }
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+<div class="container my-4">
+    <div class="mb-3">
+        <h1>@Model.Title</h1>
+        <div class="text-muted">@Model.CreatedAt.ToLocalTime().ToString("dd MMM yyyy")</div>
+        <div class="mt-2">
+            <form method="post" asp-action="LikePost" asp-controller="Blog" class="d-inline">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="id" value="@Model.Id" />
+                <button class="btn btn-outline-danger btn-sm">❤️ Like (@postLikesCount)</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="mb-4">
+        @Html.Raw(Model.Content)
+    </div>
+
+    <hr />
+
+    <!-- Comments -->
+    <h4>Comments</h4>
+
+    <!-- Comment form -->
+    <div class="mb-3">
+        <form id="commentForm" method="post" asp-action="AddComment" asp-controller="Blog">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="blogPostId" value="@Model.Id" />
+            <div class="mb-2">
+                <input id="commentName" name="name" class="form-control" placeholder="Your name" />
+            </div>
+            <div class="mb-2">
+                <textarea id="commentText" name="text" class="form-control" rows="3" placeholder="Write a comment..."></textarea>
+            </div>
+            <button type="button" class="btn btn-primary" id="commentSubmit">Post Comment</button>
+        </form>
+    </div>
+
+    <div class="mt-3">
+        @* Top-level comments *@
+        @foreach (var c in comments.Where(x => x.ParentCommentId == null).OrderByDescending(x => x.CreatedAt))
+        {
+            <div class="border rounded p-3 mb-3">
+                <div class="d-flex justify-content-between">
+                    <strong>@c.Name</strong>
+                    <small class="text-muted">@c.CreatedAt.ToLocalTime().ToString("dd MMM yyyy HH:mm")</small>
+                </div>
+                <p class="mt-2 mb-2">@c.Text</p>
+
+                <div class="d-flex gap-2 align-items-center">
+                    <form method="post" asp-action="LikeComment" asp-controller="Blog" class="d-inline">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="commentId" value="@c.Id" />
+                        <input type="hidden" name="postId" value="@Model.Id" />
+                        <button class="btn btn-outline-sm btn-outline-danger btn-sm">❤️ Like (@(commentLikeDict.ContainsKey(c.Id) ? commentLikeDict[c.Id] : 0))</button>
+                    </form>
+
+                    <button class="btn btn-sm btn-link" onclick="showReplyForm(@c.Id)">Reply</button>
+                </div>
+
+                <!-- reply form hidden -->
+                <div id="reply-form-@c.Id" class="mt-2" style="display:none;">
+                    <form method="post" asp-action="AddReply" asp-controller="Blog">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="blogPostId" value="@Model.Id" />
+                        <input type="hidden" name="parentId" value="@c.Id" />
+                        <div class="mb-2">
+                            <input class="form-control reply-name" name="name" placeholder="Your name" />
+                        </div>
+                        <div class="mb-2">
+                            <textarea class="form-control reply-text" name="text" rows="2" placeholder="Write a reply..."></textarea>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-primary reply-submit" data-parent="@c.Id">Reply</button>
+                    </form>
+                </div>
+
+                <!-- replies -->
+                <div class="ms-4 mt-3">
+                    @foreach (var r in comments.Where(x => x.ParentCommentId == c.Id).OrderBy(x => x.CreatedAt))
+                    {
+                        <div class="border rounded p-2 mb-2">
+                            <div class="d-flex justify-content-between">
+                                <strong>@r.Name</strong>
+                                <small class="text-muted">@r.CreatedAt.ToLocalTime().ToString("dd MMM yyyy HH:mm")</small>
+                            </div>
+                            <p class="mb-1">@r.Text</p>
+                            <div>
+                                <form method="post" asp-action="LikeComment" asp-controller="Blog" class="d-inline">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="commentId" value="@r.Id" />
+                                    <input type="hidden" name="postId" value="@Model.Id" />
+                                    <button class="btn btn-outline-sm btn-outline-danger btn-sm">❤️ Like (@(commentLikeDict.ContainsKey(r.Id) ? commentLikeDict[r.Id] : 0))</button>
+                                </form>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Name capture modal (Bootstrap) -->
+<div class="modal fade" id="nameModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content p-3">
+            <h5 class="mb-2">Enter your name</h5>
+            <input id="modalNameInput" class="form-control mb-2" placeholder="Your name" />
+            <div class="d-flex justify-content-end gap-2">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button id="modalSaveName" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    (function(){
+      // helper: show reply form
+      window.showReplyForm = function(id){
+          var el = document.getElementById('reply-form-' + id);
+          if(!el) return;
+          el.style.display = 'block';
+          // auto-fill name if stored
+          var stored = localStorage.getItem('blogUserName');
+          if(stored){
+              var nameInput = el.querySelector('.reply-name');
+              if(nameInput) nameInput.value = stored;
+          } else {
+              // open modal
+              var modal = new bootstrap.Modal(document.getElementById('nameModal'));
+              modal.show();
+          }
+      };
+
+      // Auto-fill comment name if stored
+      var storedName = localStorage.getItem('blogUserName');
+      if(storedName){
+          var commentName = document.getElementById('commentName');
+          if(commentName) commentName.value = storedName;
+      }
+
+      // comment submit button - ensure name present or ask
+      document.getElementById('commentSubmit').addEventListener('click', function(){
+          var nameEl = document.getElementById('commentName');
+          var textEl = document.getElementById('commentText');
+          if(!nameEl.value.trim()){
+              showNameModal(function(saved){
+                  nameEl.value = saved;
+                  document.getElementById('commentForm').submit();
+              });
+              return;
+          }
+          if(!textEl.value.trim()) return;
+          document.getElementById('commentForm').submit();
+      });
+
+      // reply submits
+      document.querySelectorAll('.reply-submit').forEach(function(btn){
+          btn.addEventListener('click', function(){
+              var parent = btn.getAttribute('data-parent');
+              var form = btn.closest('form');
+              var nameInput = form.querySelector('[name="name"]');
+              var textInput = form.querySelector('[name="text"]');
+              if(!nameInput.value.trim()){
+                  showNameModal(function(saved){
+                      nameInput.value = saved;
+                      form.submit();
+                  });
+                  return;
+              }
+              if(!textInput.value.trim()) return;
+              form.submit();
+          });
+      });
+
+      // modal save
+      document.getElementById('modalSaveName').addEventListener('click', function(){
+          var val = document.getElementById('modalNameInput').value.trim();
+          if(!val) return;
+          localStorage.setItem('blogUserName', val);
+          // close modal and callback if needed
+          var modalEl = document.getElementById('nameModal');
+          var modal = bootstrap.Modal.getInstance(modalEl);
+          modal.hide();
+      });
+
+      // helper to show modal and run callback after saved
+      function showNameModal(afterSaved){
+          var modalEl = document.getElementById('nameModal');
+          var modal = new bootstrap.Modal(modalEl);
+          modal.show();
+          var saveBtn = document.getElementById('modalSaveName');
+          var handler = function(){
+              var v = document.getElementById('modalNameInput').value.trim();
+              if(!v) return;
+              localStorage.setItem('blogUserName', v);
+              modal.hide();
+              saveBtn.removeEventListener('click', handler);
+              if(afterSaved) afterSaved(v);
+          };
+          saveBtn.addEventListener('click', handler);
+      }
+    })();
+</script>
