@@ -1,0 +1,15 @@
+C:\Users\2407094\source\repos\PortfolioProject\PortfolioProject.Repository\bin\Debug\net8.0\PortfolioProject.Repository.deps.json
+C:\Users\2407094\source\repos\PortfolioProject\PortfolioProject.Repository\bin\Debug\net8.0\PortfolioProject.Repository.runtimeconfig.json
+C:\Users\2407094\source\repos\PortfolioProject\PortfolioProject.Repository\bin\Debug\net8.0\PortfolioProject.Repository.dll
+C:\Users\2407094\source\repos\PortfolioProject\PortfolioProject.Repository\bin\Debug\net8.0\PortfolioProject.Repository.pdb
+C:\Users\2407094\source\repos\PortfolioProject\PortfolioProject.Repository\obj\Debug\net8.0\PortfolioProject.Repository.csproj.AssemblyReference.cache
+C:\Users\2407094\source\repos\PortfolioProject\PortfolioProject.Repository\obj\Debug\net8.0\PortfolioProject.Repository.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\2407094\source\repos\PortfolioProject\PortfolioProject.Repository\obj\Debug\net8.0\PortfolioProject.Repository.AssemblyInfoInputs.cache
+C:\Users\2407094\source\repos\PortfolioProject\PortfolioProject.Repository\obj\Debug\net8.0\PortfolioProject.Repository.AssemblyInfo.cs
+C:\Users\2407094\source\repos\PortfolioProject\PortfolioProject.Repository\obj\Debug\net8.0\PortfolioProject.Repository.csproj.CoreCompileInputs.cache
+C:\Users\2407094\source\repos\PortfolioProject\PortfolioProject.Repository\obj\Debug\net8.0\PortfolioProject.Repository.sourcelink.json
+C:\Users\2407094\source\repos\PortfolioProject\PortfolioProject.Repository\obj\Debug\net8.0\PortfolioProject.Repository.dll
+C:\Users\2407094\source\repos\PortfolioProject\PortfolioProject.Repository\obj\Debug\net8.0\refint\PortfolioProject.Repository.dll
+C:\Users\2407094\source\repos\PortfolioProject\PortfolioProject.Repository\obj\Debug\net8.0\PortfolioProject.Repository.pdb
+C:\Users\2407094\source\repos\PortfolioProject\PortfolioProject.Repository\obj\Debug\net8.0\PortfolioProject.Repository.genruntimeconfig.cache
+C:\Users\2407094\source\repos\PortfolioProject\PortfolioProject.Repository\obj\Debug\net8.0\ref\PortfolioProject.Repository.dll
